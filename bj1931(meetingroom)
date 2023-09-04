@@ -1,0 +1,38 @@
+#include <iostream>
+#include <bits/stdc++.h>
+using namespace std;
+int dp[10000];
+//왼쪽 부호 > 이면 내림차순
+//오른쪽 부호< 이면 오름차순
+bool cmp(pair<int,int>& a,pair<int,int>&b)
+{
+  if(a.second==b.second)return a.first<b.first;
+  return a.second<b.second;
+ 
+}
+
+int main() {
+  vector<pair<int,int>> v;
+  int N;
+  cin>>N;
+  int count=0;
+  for(int i=0;i<N;i++)
+    {
+      pair<int,int> temp;
+      cin>>temp.first>>temp.second;
+      v.push_back(temp);
+    }
+  sort(v.begin(),v.end(),cmp);
+  int current=v[0].second;
+  count++;
+  for(int i=1;i<N;i++)
+    {
+      if(v[i].first>=current)
+      {
+        current=v[i].second;
+        count++;
+        //cout<<v[i].first<<" "<<v[i].second<<endl;
+      }
+    }
+  cout<<count;
+}
